@@ -3,58 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emilio LLM API Client</title>
+    <title>Emilio LLM API Client - Krizzy Edition</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
-        /* css/style.css - Replace with your actual styles */
+         /* css/style.css - Replace with your actual styles */
         body {
-            font-family: sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
 
         #app {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh; /* Ensure full height */
         }
 
+        /* Header Styles */
         .main-controls {
-            background-color: #eee;
-            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .main-controls button {
-            padding: 8px 16px;
-            margin: 0 5px;
+            background-color: #fff;
+            color: #3498db;
             border: none;
-            background-color: #4CAF50;
-            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .main-controls button:hover {
-            background-color: #367c39;
+            background-color: #ecf0f1;
         }
 
+         /* Config Panel Styles */
         #config-container {
             background-color: #fff;
             padding: 20px;
-            border-bottom: 1px solid #ddd;
-            display: block; /* Initially shown */
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .config-wrapper {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
-        .preset-sets {
-            margin-bottom: 20px;
+        .preset-sets h3 {
+            color: #3498db;
+            margin-bottom: 15px;
         }
 
         .preset-buttons {
@@ -64,12 +73,14 @@
         }
 
         .preset-button {
-            padding: 10px 15px;
             background-color: #e0e0e0;
             border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background-color 0.3s ease;
             text-align: left;
+            width: calc(50% - 5px); /* Two buttons per row */
         }
 
         .preset-button:hover {
@@ -79,10 +90,11 @@
         .preset-name {
             font-weight: bold;
             display: block;
+            color: #2c3e50;
         }
 
         .preset-desc {
-            font-size: 0.8em;
+            font-size: 0.9em;
             color: #777;
         }
 
@@ -90,11 +102,12 @@
         textarea,
         input[type="number"] {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+            padding: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
             box-sizing: border-box;
+            font-size: 14px;
         }
 
         .sample-rate-container {
@@ -105,30 +118,38 @@
         .sample-rate-help {
             font-size: 0.8em;
             color: #777;
+            margin-top: 5px;
         }
 
         #apply-config {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+            background-color: #2ecc71;
+            color: #fff;
             border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         #apply-config:hover {
-            background-color: #0056b3;
+            background-color: #27ae60;
         }
 
+        /* Chat Interface Styles */
         .chat-interface {
             flex-grow: 1;
             display: flex;
-            flex-direction: row; /* Changed to row for Logs Container */
+            flex-direction: row;
             overflow: hidden;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
 
         .logs-wrapper {
-            width: 300px; /* Fixed width for Logs Container */
+            width: 300px;
             background-color: #f9f9f9;
             border-right: 1px solid #ddd;
             display: flex;
@@ -136,12 +157,14 @@
         }
 
         .logs-header {
-            padding: 10px;
-            background-color: #eee;
+            padding: 12px;
+            background-color: #ecf0f1;
             border-bottom: 1px solid #ddd;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-weight: bold;
+            color: #3498db;
         }
 
         #toggle-logs {
@@ -149,56 +172,65 @@
             border: none;
             cursor: pointer;
             padding: 0;
+            font-size: 20px;
         }
 
         #logs-container {
             flex-grow: 1;
             padding: 10px;
             overflow-y: auto;
+            font-size: 14px;
         }
 
         .input-controls {
-            padding: 10px;
-            background-color: #eee;
+            padding: 12px;
+            background-color: #ecf0f1;
             display: flex;
             align-items: center;
+            border-top: 1px solid #ddd;
         }
 
         #message-input {
             flex-grow: 1;
-            padding: 8px;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
             margin-right: 10px;
+            font-size: 14px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
 
         .action-buttons button {
-            padding: 8px 12px;
+            padding: 10px 16px;
             border: none;
-            background-color: #007bff;
-            color: white;
+            background-color: #3498db;
+            color: #fff;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
         }
 
         .action-buttons button:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
         }
 
+         /* Audio Visualizer Styles */
         .audio-visualizers {
             display: flex;
-            padding: 10px;
+            padding: 15px;
+            margin: 10px;
             background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .visualizer-container {
             flex: 1;
-            margin-right: 10px;
+            margin-right: 15px;
         }
 
         .visualizer-container:last-child {
@@ -207,18 +239,20 @@
 
         .visualizer-container label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
+            color: #2c3e50;
         }
 
         #input-audio-visualizer,
         #audio-visualizer {
-            height: 50px;
+            height: 60px;
             background-color: #f0f0f0;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
+        /* Video Container Styles */
         #video-container,
         #screen-container {
             position: fixed;
@@ -229,36 +263,47 @@
             padding: 20px;
             border-radius: 8px;
             text-align: center;
+            z-index: 1000;
         }
 
         #preview,
         #screen-preview {
             max-width: 80vw;
             max-height: 60vh;
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         .video-controls {
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .video-controls button,
         .close-button {
-            padding: 8px 16px;
+            background-color: #e74c3c;
+            color: #fff;
             border: none;
-            background-color: #dc3545;
-            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            border-radius: 4px;
+            transition: background-color 0.3s ease;
         }
 
         .video-controls button:hover,
         .close-button:hover {
-            background-color: #c82333;
+            background-color: #c0392b;
         }
 
+        /* Utility Classes */
         .hidden {
             display: none !important;
+        }
+
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
         }
 
         /* Mobile Styles */
@@ -284,14 +329,10 @@
             #config-toggle {
                 display: block; /* Show config toggle button */
             }
-        }
 
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
+            .preset-button {
+                width: 100%; /* Full width buttons on mobile */
+            }
         }
 
     </style>
