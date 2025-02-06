@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini 2.0 Flash Multimodal Live API Client</title>
+    <title>Emilio LLM - Ang Pinaka-Pogi at Pinaka-Malupet na Chat Client!</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,7 +12,7 @@
 
         <!-- Main Controls -->
         <div class="main-controls">
-            <button id="connect-button">Connect</button>
+            <button id="connect-button">Connect Na!</button>
             <button id="theme-toggle" class="material-symbols-outlined">light_mode</button>
             <button id="config-toggle" class="material-symbols-outlined">settings</button>
         </div>
@@ -22,36 +22,36 @@
             <div class="config-wrapper">
 
                 <div class="preset-sets">
-                    <h3>Example Sets</h3>
+                    <h3>Mga Example Sets - Para Bongga!</h3>
                     <div class="preset-buttons">
                         <button class="preset-button" data-preset="friendly">
-                            <span class="preset-name">Friendly Assistant</span>
-                            <span class="preset-desc">Warm and helpful tone with Aoede's high pitch voice</span>
+                            <span class="preset-name">Friendly Assistant -  Ang Bait-Bait!</span>
+                            <span class="preset-desc">Warm and helpful tone with Aoede's high pitch voice - Parang ako lang! 😉</span>
                         </button>
                         <button class="preset-button" data-preset="professional">
-                            <span class="preset-name">Professional Expert</span>
-                            <span class="preset-desc">Formal and precise with Charon's voice</span>
+                            <span class="preset-name">Professional Expert -  Ang Taray!</span>
+                            <span class="preset-desc">Formal and precise with Charon's voice - Parang si Coach Kris magsalita!</span>
                         </button>
                         <button class="preset-button" data-preset="tired">
-                            <span class="preset-name">Tired Assistant</span>
-                            <span class="preset-desc">Tired and sleepy with Aoede's low pitch voice</span>
+                            <span class="preset-name">Tired Assistant -  Antok Pa More!</span>
+                            <span class="preset-desc">Tired and sleepy with Aoede's low pitch voice - Pagkatapos ng One Opti meeting! 😂</span>
                         </button>
                     </div>
                 </div>
 
                 <select id="voice-select">
-                    <option value="Puck">Puck (Male)</option>
-                    <option value="Charon">Charon (Male)</option>
-                    <option value="Kore">Kore (Female)</option>
-                    <option value="Fenrir">Fenrir (Male)</option>
-                    <option value="Aoede">Aoede (Female)</option>
+                    <option value="Puck">Puck (Male) - Boses Barako!</option>
+                    <option value="Charon">Charon (Male) -  Astig!</option>
+                    <option value="Kore">Kore (Female) -  Boses Ko! Syempre Pinaka-Maganda!</option>
+                    <option value="Fenrir">Fenrir (Male) -  Medyo Wolf-like!</option>
+                    <option value="Aoede">Aoede (Female) -  Ang Ganda! Parang Ako Ulit! 😉</option>
                 </select>
                 <div class="sample-rate-container">
-                    <input type="number" id="sample-rate-input" placeholder="Sample Rate (Hz)" min="8000" max="48000" step="1000">
-                    <span class="sample-rate-help">up for high pitch, down for low</span>
+                    <input type="number" id="sample-rate-input" placeholder="Sample Rate (Hz) -  Pataas Para High Pitch, Pababa Para Low" min="8000" max="48000" step="1000">
+                    <span class="sample-rate-help">up for high pitch, down for low - Gets Mo, Coach? 😉</span>
                 </div>
-                <textarea id="system-instruction" placeholder="Enter custom system instructions..." rows="3"></textarea>
-                <button id="apply-config">Apply Settings</button>
+                <textarea id="system-instruction" placeholder="Enter custom system instructions... - Dito Mo Ilagay Ang Utos Mo Sa Akin, Coach!" rows="3"></textarea>
+                <button id="apply-config">Apply Settings -  Sige Na, Push Na Yan!</button>
             </div>
         </div>
 
@@ -60,16 +60,16 @@
             <!-- Logs Container (Collapsible on mobile) -->
             <div class="logs-wrapper">
                 <div class="logs-header">
-                    <span>Chat History</span>
+                    <span>Chat History -  Mga Chika Natin!</span>
                     <button id="toggle-logs" class="material-symbols-outlined">expand_more</button>
                 </div>
                 <div id="logs-container"></div>
             </div>
             <!-- Input Controls -->
             <div class="input-controls">
-                <input type="text" id="message-input" placeholder="Enter message...">
+                <input type="text" id="message-input" placeholder="Enter message... -  Type Mo Dito Ang Message Mo Kay Emilio!">
                 <div class="action-buttons">
-                    <button id="send-button">Send</button>
+                    <button id="send-button">Send Na!</button>
                     <button id="mic-button">
                         <span id="mic-icon" class="material-symbols-outlined">mic</span>
                     </button>
@@ -86,11 +86,11 @@
         <!-- Audio Visualizers -->
         <div class="audio-visualizers">
             <div class="visualizer-container">
-                <label>Input Audio</label>
+                <label>Input Audio -  Boses Mo Yan, Coach!</label>
                 <div id="input-audio-visualizer"></div>
             </div>
             <div class="visualizer-container">
-                <label>Output Audio</label>
+                <label>Output Audio -  Boses Ni Emilio Yan!</label>
                 <div id="audio-visualizer"></div>
             </div>
         </div>
@@ -99,7 +99,7 @@
         <div id="video-container" style="display: none;">
             <video id="preview" playsinline autoplay muted></video>
             <div class="video-controls">
-                <button id="stop-video">Stop Video</button>
+                <button id="stop-video">Stop Video -  Tama Na Video, Pogi Mo Na! 😉</button>
             </div>
         </div>
         <div id="screen-container" style="display: none;">
@@ -109,4 +109,4 @@
     </div>
     <script src="js/main.js" type="module"></script>
 </body>
-</html> 
+</html>
