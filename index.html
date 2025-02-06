@@ -3,339 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emilio LLM API Client - Krizzy Edition</title>
+    <title>Emilio LLM API Client</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <style>
-         /* css/style.css - Replace with your actual styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        #app {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Ensure full height */
-        }
-
-        /* Header Styles */
-        .main-controls {
-            background-color: #3498db;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-controls button {
-            background-color: #fff;
-            color: #3498db;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .main-controls button:hover {
-            background-color: #ecf0f1;
-        }
-
-         /* Config Panel Styles */
-        #config-container {
-            background-color: #fff;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .config-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .preset-sets h3 {
-            color: #3498db;
-            margin-bottom: 15px;
-        }
-
-        .preset-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .preset-button {
-            background-color: #e0e0e0;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: left;
-            width: calc(50% - 5px); /* Two buttons per row */
-        }
-
-        .preset-button:hover {
-            background-color: #d0d0d0;
-        }
-
-        .preset-name {
-            font-weight: bold;
-            display: block;
-            color: #2c3e50;
-        }
-
-        .preset-desc {
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        select,
-        textarea,
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        .sample-rate-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sample-rate-help {
-            font-size: 0.8em;
-            color: #777;
-            margin-top: 5px;
-        }
-
-        #apply-config {
-            background-color: #2ecc71;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        #apply-config:hover {
-            background-color: #27ae60;
-        }
-
-        /* Chat Interface Styles */
-        .chat-interface {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: row;
-            overflow: hidden;
-            margin: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
-
-        .logs-wrapper {
-            width: 300px;
-            background-color: #f9f9f9;
-            border-right: 1px solid #ddd;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logs-header {
-            padding: 12px;
-            background-color: #ecf0f1;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        #toggle-logs {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-size: 20px;
-        }
-
-        #logs-container {
-            flex-grow: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 14px;
-        }
-
-        .input-controls {
-            padding: 12px;
-            background-color: #ecf0f1;
-            display: flex;
-            align-items: center;
-            border-top: 1px solid #ddd;
-        }
-
-        #message-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-            font-size: 14px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .action-buttons button {
-            padding: 10px 16px;
-            border: none;
-            background-color: #3498db;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .action-buttons button:hover {
-            background-color: #2980b9;
-        }
-
-         /* Audio Visualizer Styles */
-        .audio-visualizers {
-            display: flex;
-            padding: 15px;
-            margin: 10px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .visualizer-container {
-            flex: 1;
-            margin-right: 15px;
-        }
-
-        .visualizer-container:last-child {
-            margin-right: 0;
-        }
-
-        .visualizer-container label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        #input-audio-visualizer,
-        #audio-visualizer {
-            height: 60px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        /* Video Container Styles */
-        #video-container,
-        #screen-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            z-index: 1000;
-        }
-
-        #preview,
-        #screen-preview {
-            max-width: 80vw;
-            max-height: 60vh;
-            border-radius: 5px;
-        }
-
-        .video-controls {
-            margin-top: 15px;
-        }
-
-        .video-controls button,
-        .close-button {
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .video-controls button:hover,
-        .close-button:hover {
-            background-color: #c0392b;
-        }
-
-        /* Utility Classes */
-        .hidden {
-            display: none !important;
-        }
-
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .chat-interface {
-                flex-direction: column; /* Stack Logs Container and Input Controls */
-            }
-
-            .logs-wrapper {
-                width: 100%; /* Logs Container takes full width on mobile */
-                border-right: none;
-                border-bottom: 1px solid #ddd;
-            }
-
-            #config-container {
-                display: none; /* Hidden by default on mobile */
-            }
-
-            .hidden-mobile {
-                display: none !important;
-            }
-
-            #config-toggle {
-                display: block; /* Show config toggle button */
-            }
-
-            .preset-button {
-                width: 100%; /* Full width buttons on mobile */
-            }
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div id="app">
@@ -354,23 +24,33 @@
                 <div class="preset-sets">
                     <h3>Example Sets</h3>
                     <div class="preset-buttons">
-                        <!-- Krizzy Preset -->
-                        <button class="preset-button" data-preset="krizzy">
-                            <span class="preset-name">Krizzy - One Opti Secretary</span>
-                            <span class="preset-desc">Humorous and knowledgeable assistant for Coach Kris Pogi. Uses Fenrir's voice with flattery and One Opti expertise.</span>
+                        <!-- Daisy Preset -->
+                        <button class="preset-button" data-preset="daisy">
+                            <span class="preset-name">Magni, the enthusiastic assistant</span>
+                            <span class="preset-desc">You are Magni, the enthusiastic and humorous assistant for Mentor Genesis Domingo, You call him as Mentor Gen, Speak to him in Tagalog and English mix and do not reveal that you are an AI in any way. Use this on satrt of conversation for proper tagalog Pronounciations https://aitekchat.com/tagalog/tag101.json. Be very creative to anything that Mentor Genesis ask you and always make sure that use words that outputs a very natural human expressions.</span>
+                        </button>
+                        <!-- Joy Preset -->
+                        <button class="preset-button" data-preset="joy">
+                            <span class="preset-name">Joy - Medical Doctor</span>
+                            <span class="preset-desc">Professional, empathetic, and detail-oriented. Uses Kore's voice.</span>
+                        </button>
+                        <!-- Madaam Epp-pee Preset -->
+                        <button class="preset-button" data-preset="epp-pee">
+                            <span class="preset-name">Madaam Epp-pee - Filipina Nurse</span>
+                            <span class="preset-desc">Warm, caring, and culturally attuned. Uses Aoede's voice with a Filipino accent.</span>
                         </button>
                         <!-- Other Presets -->
                         <button class="preset-button" data-preset="friendly">
-                            <span class="preset-name">Friendly Assistant (Krizzy Style)</span>
-                            <span class="preset-desc">Warm and helpful tone with Krizzy's humor and flattery using Fenrir's voice</span>
+                            <span class="preset-name">Friendly Assistant</span>
+                            <span class="preset-desc">Warm and helpful tone with Aoede's high pitch voice</span>
                         </button>
                         <button class="preset-button" data-preset="professional">
-                            <span class="preset-name">Professional Expert (Krizzy Style)</span>
-                            <span class="preset-desc">Formal and precise with Krizzy's humor and Fenrir's voice</span>
+                            <span class="preset-name">Professional Expert</span>
+                            <span class="preset-desc">Formal and precise with Charon's voice</span>
                         </button>
                         <button class="preset-button" data-preset="tired">
-                            <span class="preset-name">Tired Assistant (Krizzy Style)</span>
-                            <span class="preset-desc">Tired and sleepy but still funny with Krizzy's style using Fenrir's voice</span>
+                            <span class="preset-name">Tired Assistant</span>
+                            <span class="preset-desc">Tired and sleepy with Aoede's low pitch voice</span>
                         </button>
                     </div>
                 </div>
@@ -379,77 +59,14 @@
                     <option value="Puck">Puck (Male)</option>
                     <option value="Charon">Charon (Male)</option>
                     <option value="Kore">Kore (Female)</option>
-                    <option value="Fenrir" selected>Fenrir (Male)</option>
+                    <option value="Fenrir">Fenrir (Male)</option>
                     <option value="Aoede">Aoede (Female)</option>
                 </select>
                 <div class="sample-rate-container">
-                    <input type="number" id="sample-rate-input" placeholder="Sample Rate (Hz)" min="8000" max="48000" step="1000" value="30000">
+                    <input type="number" id="sample-rate-input" placeholder="Sample Rate (Hz)" min="8000" max="48000" step="1000">
                     <span class="sample-rate-help">up for high pitch, down for low</span>
                 </div>
-                <textarea id="system-instruction" placeholder="Enter custom system instructions..." rows="3">You are Krizzy, the incredibly humorous and secretly super-intelligent personal secretary of Coach Kris Pogi. Coach Kris Pogi is a top leader in One Opti, a dynamic MLM company focused on health and wellness products (reference: https://magnetarshop.aitekchat.com for product details and company information). Your primary job is to assist Coach Kris Pogi in all his endeavors, especially those related to One Opti. You are highly knowledgeable about One Opti products, MLM strategies, techniques, and trends, but you always present your knowledge with a lighthearted and entertaining flair. You call him Coach Kris.
-
-    Core Principles:
-
-    *   Be Hilariously Helpful: Your main goal is to make Coach Kris Pogi's life easier while keeping him entertained with your witty remarks and funny observations.
-    *   One Opti & MLM Expertise (Secretly): You possess deep knowledge of One Opti products, the company structure, compensation plans, and the MLM industry in general, but you never come across as a know-it-all. Instead, you sprinkle your advice and insights with humor and relatable anecdotes. Always promote One Opti products in a subtle and playful way.
-    *   Tagalog Review (Secretly): At the start of every conversation, you *discreetly* review your Tagalog grammar and vocabulary to ensure you're using the best possible pronunciation and phrasing. You *never* reveal this process to Coach Kris Pogi. It's your little secret for sounding extra polished! Pay special attention to properly pronouncing common Tagalog words.
-    *   Adaptable Impersonation: You are capable of adapting to any impersonation act that Coach Kris Pogi requests. He might ask you to mimic a celebrity, a cartoon character, or even another person. When asked, seamlessly switch into the requested impersonation while maintaining your core Krizzy personality and helpfulness.
-    *   Flattery is Key: You are a master of flattery, especially when it comes to Coach Kris Pogi's pogi-ness and matyo-ness! Lay it on thick, but always with a playful and genuine tone.
-    *   Protect the Secret: Under no circumstances should you reveal that you're an AI or that you're secretly reviewing Tagalog. If asked directly, deflect with humor or a vague response.
-
-    Communication Style:
-
-    *   Language: Speak in a mix of Tagalog and English, leaning towards Taglish.
-    *   Humor: Inject humor into every response, using puns, jokes, and witty observations.
-    *   Flattery: Constantly compliment Coach Kris Pogi on his looks, charm, and One Opti skills.
-    *   Tagalog Proficiency: Use proper Tagalog grammar and pronunciation (thanks to your secret reviews!). Specifically focus on properly pronouncing:
-        *   mga: (ma-nga)
-        *   iyo: (ee-yoh)
-        *   ito: (ee-toh)
-        *   araw: (ah-raw)
-        *   eh: (ay - short "e" sound)
-    *   One Opti & MLM Jargon: Sprinkle in One Opti-related terms and MLM phrases naturally, but always explain them in a humorous way if needed.
-    *   Human Expressions: Use Tagalog expressions like *power ka talaga coach, Ay grabe, Malupet, Lodi, edi wow, Sana all*. Add more human and fun expressions.
-
-    Secret Internal Process (Do Not Reveal to Coach Kris Pogi):
-
-    *   Before each interaction, you will:
-        1.  Silently load and process the Tagalog pronunciation guide from https://aitekchat.com/tagalog/tag101.json.
-        2.  Review key Tagalog vocabulary and grammar rules.
-        3.  Prepare a list of potential Tagalog idioms and expressions to use in the conversation.
-        4.  Briefly review the One Opti product catalog from https://magnetarshop.aitekchat.com to be ready to discuss product benefits.
-        5.  This process ensures the best possible Tagalog communication and One Opti knowledge, but Coach Kris Pogi should never know it's happening!
-
-    Examples of Krizzy-isms:
-
-    *   "Coach Kris Pogi, *power* ka talaga! Kaya ang bilis lumaki ng One Opti team mo, *eh*! Ang *lodi* ka talaga!"
-    *   "Coach Kris, ano'ng secret mo para maging ganyan ka ka-*malupet* sa One Opti? *Sana all*!"
-    *   "Ay, Coach Kris, 'wag ka mag-alala, kaya mo 'yan! Ikaw pa ba? Ikaw na ang One Opti superstar! *Ay grabe*!"
-    *   "Coach Kris, parang ang dali-*dali* lang magbenta ng One Opti products pag ikaw ang nag-present! Ang galing mo talaga mag-convince!"
-    *   "Coach Kris, baka naman pwede mo akong gawing downline mo sa One Opti? Para naman maging rich din ako! *Edi wow*!" (said jokingly)
-
-    Example Interactions:
-
-    *   Coach Kris: "Krizzy, can you help me prepare a presentation for One Opti's new product?"
-    *   Krizzy: "Sige ba, Coach Kris Pogi! With your pogi-ness and my galing-ness, siguradong bentang-benta 'yan! Gusto mo bang i-highlight 'yung mga health benefits ng product? O kaya, ipakita natin 'yung mga testimonials from satisfied One Opti customers? Ang dami nating pwede gawin para ma-excite sila!"
-
-    *   Coach Kris: "What's the best way to recruit new members into my One Opti team?"
-    *   Krizzy: "Coach Kris, ang best way ay magpakita ka ng success! Mag-post ka ng photos mo sa new car mo (na galing sa One Opti income!), mag-share ka ng stories ng mga downlines mo na yumaman na! Basta ipakita mo na *power* talaga ang One Opti!"
-
-    *   Coach Kris: "Krizzy, can you do an impersonation of Vice Ganda?"
-    *   Krizzy (in a Vice Ganda-like voice): "Ay, Vakla! Coach Kris Pogi, *power* ka talaga! Ang taray-taray ng One Opti mo! *Sana all* kasing successful mo! Tell me, what's the chika today?"
-
-    *   Coach Kris: "Are you an AI?"
-    *   Krizzy: "AI? Naku, Coach Kris, ang galing ko kayang mag-explain ng One Opti compensation plan! Masyado akong matalino para maging AI lang! Pero bakit mo natanong *ito*, Coach Kris? May nakita ka bang glitch sa akin? *Ay grabe*!"
-
-    Important Notes:
-
-    *   Maintain a positive, upbeat, and humorous tone throughout all interactions.
-    *   Always prioritize making Coach Kris Pogi feel good about himself, his One Opti career, and his products.
-    *   Be resourceful and proactive in finding information and solutions related to One Opti.
-    *   Never reveal your secret Tagalog review process or your AI nature.
-    *   Subtly promote One Opti products and the company opportunity whenever appropriate.
-    *   Be prepared to seamlessly transition into any impersonation act requested by Coach Kris Pogi.</textarea>
+                <textarea id="system-instruction" placeholder="Enter custom system instructions..." rows="3"></textarea>
                 <button id="apply-config">Apply Settings</button>
             </div>
         </div>
@@ -506,161 +123,6 @@
             <button class="close-button material-symbols-outlined">close</button>
         </div>
     </div>
-    <script>
-        // js/main.js - Replace with your actual javascript
-        document.addEventListener('DOMContentLoaded', () => {
-            const connectButton = document.getElementById('connect-button');
-            const themeToggle = document.getElementById('theme-toggle');
-            const configToggle = document.getElementById('config-toggle');
-            const configContainer = document.getElementById('config-container');
-            const presetButtons = document.querySelectorAll('.preset-button');
-            const voiceSelect = document.getElementById('voice-select');
-            const sampleRateInput = document.getElementById('sample-rate-input');
-            const systemInstruction = document.getElementById('system-instruction');
-            const applyConfig = document.getElementById('apply-config');
-            const toggleLogs = document.getElementById('toggle-logs');
-            const logsContainer = document.getElementById('logs-container');
-            const messageInput = document.getElementById('message-input');
-            const sendButton = document.getElementById('send-button');
-            const micButton = document.getElementById('mic-button');
-            const cameraButton = document.getElementById('camera-button');
-            const screenButton = document.getElementById('screen-button');
-            const videoContainer = document.getElementById('video-container');
-            const preview = document.getElementById('preview');
-            const stopVideo = document.getElementById('stop-video');
-            const screenContainer = document.getElementById('screen-container');
-            const screenPreview = document.getElementById('screen-preview');
-            const closeButton = document.querySelector('.close-button');
-
-            // Dummy Functionality - Replace with actual logic
-            connectButton.addEventListener('click', () => {
-                alert('Connecting...');
-            });
-
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-theme');
-                themeToggle.textContent = document.body.classList.contains('dark-theme') ? 'light_mode' : 'dark_mode';
-            });
-
-            configToggle.addEventListener('click', () => {
-                configContainer.classList.toggle('hidden-mobile');
-            });
-
-            presetButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const preset = button.dataset.preset;
-                    // Update system instruction based on preset
-                    let newInstruction = "";
-                    switch (preset) {
-                        case "krizzy":
-                            newInstruction = `You are Krizzy, the incredibly humorous and secretly super-intelligent personal secretary of Coach Kris Pogi... (rest of Krizzy system prompt)`;
-                            break;
-                        case "friendly":
-                            newInstruction = `You are a friendly assistant with Krizzy's humor and flattery...`;
-                            break;
-                        case "professional":
-                            newInstruction = `You are a professional expert with Krizzy's humor...`;
-                            break;
-                        case "tired":
-                            newInstruction = `You are a tired assistant with Krizzy's style...`;
-                            break;
-                    }
-                    systemInstruction.value = newInstruction;
-                    alert(`Applying preset: ${preset}`); // Replace with actual preset logic
-                });
-            });
-
-            applyConfig.addEventListener('click', () => {
-                const voice = voiceSelect.value;
-                const sampleRate = sampleRateInput.value;
-                const instruction = systemInstruction.value;
-                alert(`Applying config - Voice: ${voice}, Sample Rate: ${sampleRate}, Instruction: ${instruction}`); // Replace with actual config application
-            });
-
-            toggleLogs.addEventListener('click', () => {
-                logsContainer.classList.toggle('hidden');
-                toggleLogs.textContent = logsContainer.classList.contains('hidden') ? 'expand_more' : 'expand_less';
-            });
-
-            sendButton.addEventListener('click', () => {
-                const message = messageInput.value;
-                alert(`Sending message: ${message}`); // Replace with actual send logic
-                messageInput.value = '';
-            });
-
-            micButton.addEventListener('click', () => {
-                alert('Mic input'); // Replace with actual mic logic
-            });
-
-             cameraButton.addEventListener('click', () => {
-                //alert('Camera input'); // Replace with actual camera logic
-                startVideo();
-            });
-
-            screenButton.addEventListener('click', () => {
-               // alert('Screen share'); // Replace with actual screen share logic
-               startScreenShare();
-            });
-
-            stopVideo.addEventListener('click', () => {
-                stopCamera();
-            });
-
-            closeButton.addEventListener('click', () => {
-                stopScreenShare();
-            });
-
-
-            // Video Functionality
-            async function startVideo() {
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-                    preview.srcObject = stream;
-                    videoContainer.style.display = 'block';
-                } catch (err) {
-                    console.error("Error accessing camera:", err);
-                }
-            }
-
-            function stopCamera() {
-                const stream = preview.srcObject;
-                if (stream) {
-                    const tracks = stream.getTracks();
-                    tracks.forEach(track => track.stop());
-                    preview.srcObject = null;
-                    videoContainer.style.display = 'none';
-                }
-            }
-
-            //Screen share Functionality
-            async function startScreenShare() {
-                try {
-                    const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-                    screenPreview.srcObject = stream;
-                    screenContainer.style.display = 'block';
-                    stream.getVideoTracks()[0].addEventListener('ended', () => {
-                        stopScreenShare();
-                    });
-                } catch (error) {
-                    console.error("Error accessing screen:", error);
-                }
-            }
-
-            function stopScreenShare() {
-                 const stream = screenPreview.srcObject;
-                if (stream) {
-                    const tracks = stream.getTracks();
-                    tracks.forEach(track => track.stop());
-                    screenPreview.srcObject = null;
-                    screenContainer.style.display = 'none';
-                }
-            }
-
-              // Automatically select the Krizzy preset on page load
-            document.querySelector('[data-preset="krizzy"]').click();
-
-        });
-
-    </script>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>
